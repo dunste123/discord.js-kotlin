@@ -1,0 +1,7 @@
+.gradle/
+build/
+.idea/
+node_modules/
+web/
+bot/
+config.json
