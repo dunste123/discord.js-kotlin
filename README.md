@@ -1,4 +1,4 @@
 Discord.js with kotlin
 ---
 
-Run with `yarn run`
+Run with `yarn start`
