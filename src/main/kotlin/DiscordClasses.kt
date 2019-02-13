@@ -75,7 +75,7 @@ external class Discord {
     class Message : UserResolvable {
         val attachments: Collection<String, dynamic>
         val author: User
-        val channel: Channel
+        val channel: TextChannel
         val cleanContent: String
         val client: Client
         val content: String

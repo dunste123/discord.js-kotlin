@@ -1,11 +1,12 @@
-import Discord.TextChannel
-import Discord.RichEmbed
 import Discord.Message
-
-external fun require(module: String): dynamic
+import commands.CodeCommand
+import commands.ShutdownCommand
+import commands.interfaces.ICommand
 
 fun main(args: Array<String>) {
     val config = require("../config.json")
+
+    registerCommands()
 
     println("Hello JavaScript!")
 
@@ -14,7 +15,7 @@ fun main(args: Array<String>) {
     client.on("ready") {
         println("Logged in as ${client.user.tag}")
 
-        val embed = RichEmbed()
+        /*val embed = RichEmbed()
 
         embed.setDescription("Hello from kotlin")
 
@@ -25,7 +26,9 @@ fun main(args: Array<String>) {
                 embed = embed
         ).then {
             println("Embed send")
-        }
+        }*/
+
+        println("Loaded ${Object.keys(Constatnts.commands).length} commands")
     }
 
     client.on("message") { handleMessage(it) }
@@ -34,5 +37,28 @@ fun main(args: Array<String>) {
 }
 
 fun handleMessage(message: Message) {
-    println("${message.author.tag}: ${message.content}")
+    val content = message.content.toLowerCase()
+
+    if (!content.startsWith("j!")) {
+        return
+    }
+
+    val commands = Constatnts.commands
+
+    val split = content.split("\\s+".toRegex())
+    val command = split[0].replaceFirst("j!", "")
+    val args = split.drop(1)
+
+    if (commands[command] != null) {
+        (commands[command] as ICommand).execute(command, args, message)
+    }
+}
+
+fun registerCommands() {
+    addCommand(CodeCommand())
+    addCommand(ShutdownCommand())
+}
+
+fun addCommand(command: ICommand) {
+    Constatnts.commands[command.getName()] = command
 }
