@@ -1,3 +1,7 @@
+import Discord.TextChannel
+import Discord.RichEmbed
+import Discord.Message
+
 external fun require(module: String): dynamic
 
 fun main(args: Array<String>) {
@@ -5,28 +9,30 @@ fun main(args: Array<String>) {
 
     println("Hello JavaScript!")
 
-    val client: dynamic = Discord.Client()
+    val client = Discord.Client()
 
     client.on("ready") {
         println("Logged in as ${client.user.tag}")
 
-        val embed: dynamic = Discord.RichEmbed()
+        val embed = RichEmbed()
 
         embed.setDescription("Hello from kotlin")
 
-       /* client.channels.get("513113435727331329").send(
+        val channel = client.guilds.get("416512197590777857").channels.get("513113435727331329") as TextChannel
+
+        channel.send(
                 content = "YEET",
                 embed = embed
-        )*/
-
-        println("Embed send")
+        ).then {
+            println("Embed send")
+        }
     }
 
-    client.on("message") { message -> handleMessage(message) }
+    client.on("message") { handleMessage(it) }
 
     client.login(config.token)
 }
 
-fun handleMessage(message: dynamic) {
+fun handleMessage(message: Message) {
     println("${message.author.tag}: ${message.content}")
 }
