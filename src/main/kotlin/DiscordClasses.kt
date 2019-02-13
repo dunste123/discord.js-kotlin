@@ -34,11 +34,14 @@ external class Discord {
         val guilds: Collection<String, Guild>
         val user: ClientUser
 
+        fun destroy(): Promise<*>
         fun login(token: String): Promise<String>
         fun on(event: String, cb: (item: dynamic) -> Unit)
     }
 
-    class ClientUser : User
+    class ClientUser : User {
+        fun setPresence(data: dynamic): Promise<ClientUser>
+    }
 
     class Collection<K, V> {
         fun get(key: K): V
@@ -83,6 +86,8 @@ external class Discord {
         val createdTimestamp: Number
         val deletable: Boolean
         val deleted: Boolean
+
+        fun react(emoji: String): Promise<MessageReaction>
     }
 
     class MessageOptions {
@@ -91,6 +96,14 @@ external class Discord {
         var embed: RichEmbed
         var disableEveryone: Boolean
         var reply: UserResolvable
+    }
+
+    class MessageReaction {
+        val count: Number
+        val emoji: dynamic
+        val me: Boolean
+        val message: Message
+        val users: Collection<String, User>
     }
 
     class PermissionOverwrites {

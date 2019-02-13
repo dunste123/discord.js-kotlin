@@ -15,6 +15,14 @@ fun main(args: Array<String>) {
     client.on("ready") {
         println("Logged in as ${client.user.tag}")
 
+        client.user.setPresence(JSON.parse("""
+            {
+                "game": {
+                    "name": "Kotlin bot"
+                }
+            }
+        """.trimIndent()))
+
         /*val embed = RichEmbed()
 
         embed.setDescription("Hello from kotlin")
@@ -28,7 +36,7 @@ fun main(args: Array<String>) {
             println("Embed send")
         }*/
 
-        println("Loaded ${Object.keys(Constatnts.commands).length} commands")
+        println("Loaded ${commandsObj.size} commands")
     }
 
     client.on("message") { handleMessage(it) }
@@ -43,14 +51,12 @@ fun handleMessage(message: Message) {
         return
     }
 
-    val commands = Constatnts.commands
-
     val split = content.split("\\s+".toRegex())
     val command = split[0].replaceFirst("j!", "")
     val args = split.drop(1)
 
-    if (commands[command] != null) {
-        (commands[command] as ICommand).execute(command, args, message)
+    if (commandsObj.containsKey(command)) {
+        commandsObj[command]!!.execute(command, args, message)
     }
 }
 
@@ -60,5 +66,5 @@ fun registerCommands() {
 }
 
 fun addCommand(command: ICommand) {
-    Constatnts.commands[command.getName()] = command
+    commandsObj[command.getName()] = command
 }
