@@ -52,7 +52,7 @@ fun handleMessage(message: Message) {
     }
 
     val split = content.split("\\s+".toRegex())
-    val command = split[0].replaceFirst("j!", "")
+    val command = split[0].substring(2)
     val args = split.drop(1)
 
     if (commandsObj.containsKey(command)) {
