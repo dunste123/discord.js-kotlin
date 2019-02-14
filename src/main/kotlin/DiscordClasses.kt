@@ -33,6 +33,7 @@ external class Discord {
         val channels: Collection<String, Channel>
         val guilds: Collection<String, Guild>
         val user: ClientUser
+        val ping: Number
 
         fun destroy(): Promise<*>
         fun login(token: String): Promise<String>
@@ -86,6 +87,17 @@ external class Discord {
         val createdTimestamp: Number
         val deletable: Boolean
         val deleted: Boolean
+
+        fun edit(content: String): Promise<Message>
+
+        fun edit(embed: RichEmbed): Promise<Message>
+        fun edit(content: String, embed: RichEmbed): Promise<Message>
+
+        fun edit(attachment: Attachment): Promise<Message>
+        fun edit(content: String, attachment: Attachment): Promise<Message>
+
+        fun edit(options: MessageOptions): Promise<Message>
+        fun edit(content: String, options: MessageOptions): Promise<Message>
 
         fun react(emoji: String): Promise<MessageReaction>
     }

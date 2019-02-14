@@ -10,4 +10,6 @@ class CodeCommand : ICommand {
     }
 
     override fun getName() = "code"
+
+    override fun getHelp() = "Shows the code of this bot"
 }

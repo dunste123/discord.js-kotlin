@@ -11,12 +11,12 @@ class ShutdownCommand : ICommand {
             message.react("✅").then {
                 message.client.destroy().then {
                     process.exit(0)
-
-                    return@then
                 }
             }
         }
     }
 
     override fun getName() = "shutdown"
+
+    override fun getHelp() = "Shuts the bot down :)"
 }

@@ -1,5 +1,7 @@
 import Discord.Message
 import commands.CodeCommand
+import commands.HelpCommand
+import commands.PingCommand
 import commands.ShutdownCommand
 import commands.interfaces.ICommand
 
@@ -47,12 +49,12 @@ fun main(args: Array<String>) {
 fun handleMessage(message: Message) {
     val content = message.content.toLowerCase()
 
-    if (!content.startsWith("j!")) {
+    if (!content.startsWith(prefix)) {
         return
     }
 
     val split = content.split("\\s+".toRegex())
-    val command = split[0].substring(2)
+    val command = split[0].substring(prefix.length)
     val args = split.drop(1)
 
     if (commandsObj.containsKey(command)) {
@@ -63,6 +65,8 @@ fun handleMessage(message: Message) {
 fun registerCommands() {
     addCommand(CodeCommand())
     addCommand(ShutdownCommand())
+    addCommand(HelpCommand())
+    addCommand(PingCommand())
 }
 
 fun addCommand(command: ICommand) {
