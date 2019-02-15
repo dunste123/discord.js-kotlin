@@ -1,8 +1,5 @@
 import Discord.Message
-import commands.CodeCommand
-import commands.HelpCommand
-import commands.PingCommand
-import commands.ShutdownCommand
+import commands.*
 import commands.interfaces.ICommand
 
 fun main(args: Array<String>) {
@@ -49,7 +46,7 @@ fun main(args: Array<String>) {
 fun handleMessage(message: Message) {
     val content = message.content.toLowerCase()
 
-    if (!content.startsWith(prefix)) {
+    if (!content.startsWith(prefix) || message.author.bot) {
         return
     }
 
@@ -67,6 +64,7 @@ fun registerCommands() {
     addCommand(ShutdownCommand())
     addCommand(HelpCommand())
     addCommand(PingCommand())
+    addCommand(AboutCommand())
 }
 
 fun addCommand(command: ICommand) {

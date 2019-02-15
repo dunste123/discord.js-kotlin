@@ -4,6 +4,10 @@ import kotlin.js.Promise
 @JsModule("discord.js")
 external class Discord {
 
+    companion object {
+        val version: String
+    }
+
     class Attachment {
         constructor(file: Any, name: String)
         constructor(file: Any)
