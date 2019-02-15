@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "discord.js with kotlin",
   "scripts": {
-    "start": "gradle build && node bot/index.js"
+    "start": "./gradlew build && node bot/index.js"
   },
   "license": "MIT",
   "author": {
