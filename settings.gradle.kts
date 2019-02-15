@@ -7,4 +7,14 @@
  * in the user guide at https://docs.gradle.org/5.1.1/userguide/multi_project_builds.html
  */
 
-rootProject.name = 'djs-kotlin'
+rootProject.name = "djs-kotlin"
+
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "kotlin2js") {
+                useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
+            }
+        }
+    }
+}
