@@ -22,19 +22,6 @@ fun main(args: Array<String>) {
             }
         """.trimIndent()))
 
-        /*val embed = RichEmbed()
-
-        embed.setDescription("Hello from kotlin")
-
-        val channel = client.guilds.get("416512197590777857").channels.get("513113435727331329") as TextChannel
-
-        channel.send(
-                content = "YEET",
-                embed = embed
-        ).then {
-            println("Embed send")
-        }*/
-
         println("Loaded ${commandsObj.size} commands")
     }
 
@@ -69,12 +56,13 @@ fun registerCommands() {
     addCommand(HelpCommand())
     addCommand(PingCommand())
     addCommand(AboutCommand())
+    addCommand(YeetCommand())
 }
 
 fun addCommand(command: ICommand) {
-    commandsObj[command.getName()] = command
+    commandsObj[command.getName().toLowerCase()] = command
 
     command.getAliasses().forEach {
-        aliasesObj[it] = command.getName()
+        aliasesObj[it.toLowerCase()] = command.getName()
     }
 }
