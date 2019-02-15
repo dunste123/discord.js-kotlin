@@ -10,7 +10,13 @@ class HelpCommand : ICommand {
         val embed = Discord.RichEmbed()
 
         commandsObj.forEach {
-            embed.addField("$prefix${it.key}", it.value.getHelp(), true)
+            embed.addField(
+                    "$prefix${it.key}",
+                    """${it.value.getHelp()}
+                        |Aliases: ${it.value.getAliasses().joinToString(", ")}
+                    """.trimMargin(),
+                    true
+            )
         }
 
         message.channel.send(embed)
@@ -19,4 +25,6 @@ class HelpCommand : ICommand {
     override fun getName() = "help"
 
     override fun getHelp() = "Shows a list of the commands"
+
+    override fun getAliasses() = arrayOf("commands")
 }

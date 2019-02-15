@@ -51,8 +51,12 @@ fun handleMessage(message: Message) {
     }
 
     val split = content.split("\\s+".toRegex())
-    val command = split[0].substring(prefix.length)
+    var command = split[0].substring(prefix.length)
     val args = split.drop(1)
+
+    if (aliasesObj.containsKey(command)) {
+        command = aliasesObj[command]!!
+    }
 
     if (commandsObj.containsKey(command)) {
         commandsObj[command]!!.execute(command, args, message)
@@ -69,4 +73,8 @@ fun registerCommands() {
 
 fun addCommand(command: ICommand) {
     commandsObj[command.getName()] = command
+
+    command.getAliasses().forEach {
+        aliasesObj[it] = command.getName()
+    }
 }
