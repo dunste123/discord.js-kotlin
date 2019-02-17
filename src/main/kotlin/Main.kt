@@ -31,14 +31,14 @@ fun main(args: Array<String>) {
 }
 
 fun handleMessage(message: Message) {
-    val content = message.content.toLowerCase()
+    val content = message.content
 
     if (!content.startsWith(prefix) || message.author.bot) {
         return
     }
 
     val split = content.split("\\s+".toRegex())
-    var command = split[0].substring(prefix.length)
+    var command = split[0].substring(prefix.length).toLowerCase()
     val args = split.drop(1)
 
     if (aliasesObj.containsKey(command)) {
@@ -57,6 +57,7 @@ fun registerCommands() {
     addCommand(PingCommand())
     addCommand(AboutCommand())
     addCommand(YeetCommand())
+    addCommand(EvalCommand())
 }
 
 fun addCommand(command: ICommand) {
