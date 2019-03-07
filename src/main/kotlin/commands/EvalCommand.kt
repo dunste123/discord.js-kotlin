@@ -25,7 +25,7 @@ class EvalCommand : ICommand {
             channel.send("```$evaluated```")
 
         }
-        catch (e: Error) {
+        catch (e: dynamic) {
             channel.send("Whoopsie something broke: $e")
         }
 
