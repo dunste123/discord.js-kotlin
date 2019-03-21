@@ -93,6 +93,7 @@ external class Discord {
         val deletable: Boolean
         val deleted: Boolean
         val guild: Guild
+        val id: String
 
         fun edit(content: String): Promise<Message>
 
