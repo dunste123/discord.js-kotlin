@@ -23,6 +23,10 @@ fun main(args: Array<String>) {
         """.trimIndent()))
 
         println("Loaded ${commandsObj.size} commands")
+
+        client.guilds.forEach {
+            println(it)
+        }
     }
 
     client.on("message") { handleMessage(it) }

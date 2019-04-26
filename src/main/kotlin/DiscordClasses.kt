@@ -49,10 +49,11 @@ external class Discord {
         fun setPresence(data: dynamic): Promise<ClientUser>
     }
 
-    class Collection<K, V> {
+    class Collection<K, V>{
         fun get(key: K): V
         fun filter(func: (item: V) -> Unit): Array<V>
         fun find(func: (item: V) -> Unit): V
+        fun forEach(func: (item: V) -> Unit)
     }
 
     class DMChannel : Channel
