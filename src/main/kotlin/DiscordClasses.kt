@@ -47,19 +47,24 @@ external class Discord {
 
     class ClientUser : User {
         fun setPresence(data: dynamic): Promise<ClientUser>
+        fun setUsername(username: String, password: String = definedExternally): Promise<ClientUser>
     }
 
-    class Collection<K, V>{
+    class Collection<K, V> {
         fun get(key: K): V
         fun filter(func: (item: V) -> Unit): Array<V>
         fun find(func: (item: V) -> Unit): V
         fun forEach(func: (item: V) -> Unit)
+        fun first(): V
     }
 
     class DMChannel : Channel
 
     class Guild : UserResolvable {
         val channels: Collection<String, GuildChannel>
+
+        fun leave(): Promise<Guild>
+        fun setName(name: String): Promise<Guild>
     }
 
     open class GuildChannel : Channel {
