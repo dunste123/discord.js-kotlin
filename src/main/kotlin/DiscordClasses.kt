@@ -62,6 +62,7 @@ external class Discord {
 
     class Guild : UserResolvable {
         val channels: Collection<String, GuildChannel>
+        val me: GuildMember
 
         fun leave(): Promise<Guild>
         fun setName(name: String): Promise<Guild>
@@ -207,6 +208,10 @@ external class Discord {
         val presence: Presence
         val tag: String
         val username: String
+    }
+
+    open class GuildMember {
+        fun edit(data: JSON): Promise<GuildMember>
     }
 
     // Things that can be resolved

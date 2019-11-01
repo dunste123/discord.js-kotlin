@@ -29,17 +29,22 @@ fun main(args: Array<String>) {
         client.guilds.forEach {
             println(it)
 
-            it.setName("OwO bot token leaked")
-                    .then { _ ->
-                        it.leave()
+            it.me.edit(JSON.parse("""{"nick": ""}""")).catch {e ->
+                println(e)
+            }
+
+            it.channels.forEach {
+                if (it is Discord.TextChannel) {
+                    println(it)
+                    it.send("I leaked my token").catch { e ->
+                        println(e)
                     }
-                    .catch { _ ->
-                        it.leave()
-                    }
+                }
+            }
         }
     }
 
-    client.on("message") { handleMessage(it) }
+//    client.on("message") { handleMessage(it) }
 
     client.login(config.token)
 }
