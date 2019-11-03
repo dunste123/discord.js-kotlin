@@ -5,7 +5,7 @@ import commands.interfaces.ICommand
 fun main(args: Array<String>) {
     val config = require("../config.json")
 
-    registerCommands()
+//    registerCommands()
 
     println("Hello JavaScript!")
 
@@ -24,12 +24,18 @@ fun main(args: Array<String>) {
 
         println("Loaded ${commandsObj.size} commands")
 
-        client.user.setUsername("I leaked my token XD")
+//        client.user.setUsername("I leaked my token XD")
+
+        println("Bot is in ${client.guilds.size} guilds")
 
         client.guilds.forEach {
             println(it)
 
-            it.me.edit(JSON.parse("""{"nick": ""}""")).catch {e ->
+            it.me.edit(JSON.parse("""{"nick": ""}"""))
+			.then {
+				println("test")
+			}
+			.catch {e ->
                 println(e)
             }
 
@@ -69,7 +75,7 @@ fun handleMessage(message: Message) {
     }
 }
 
-fun registerCommands() {
+/*fun registerCommands() {
     addCommand(CodeCommand())
     addCommand(ShutdownCommand())
     addCommand(HelpCommand())
@@ -77,12 +83,13 @@ fun registerCommands() {
     addCommand(AboutCommand())
     addCommand(YeetCommand())
     addCommand(EvalCommand())
-}
+}*/
 
+/*
 fun addCommand(command: ICommand) {
     commandsObj[command.getName().toLowerCase()] = command
 
     command.getAliasses().forEach {
         aliasesObj[it.toLowerCase()] = command.getName()
     }
-}
+}*/

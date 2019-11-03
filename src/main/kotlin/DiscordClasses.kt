@@ -51,6 +51,8 @@ external class Discord {
     }
 
     class Collection<K, V> {
+        val size: Number
+
         fun get(key: K): V
         fun filter(func: (item: V) -> Unit): Array<V>
         fun find(func: (item: V) -> Unit): V
